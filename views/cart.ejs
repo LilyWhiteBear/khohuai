@@ -1,0 +1,66 @@
+<%- include("partials/header") %>
+    <link rel="stylesheet" href="/css/cart.css">
+
+<div class="container-fluid">
+<br>
+    <div class="row justify-content-md-center" style="min-height: 250px;">  
+        <div class="col-12 col-md-8 text-center">
+            <h4>ตะกร้าสินค้า</h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">หมายเลขสลาก</th>
+                        <th scope="col">ราคาต่อชิ้น</th>
+                        <th scope="col">จำนวน</th>
+                        <th scope="col">ราคารวม</th>
+                        <th scope="col">ตัวเลือก</th>
+                    </tr>
+                    </thead>
+                    <tbody data-idlot="<%= cart.items %>" id="mycart">
+                        <% cart.items.forEach(function(lot){ %>
+                            <% if(lot.qty != 0) { %>
+                            <tr>
+                                <td scope="row"><a href="/blog/lotId=<%= lot.item %>" style="color: black;"><%= lot.number %></a></th>
+                                <td><%= lot.price %> บาท</td>
+                                <td><%= lot.qty %> ชิ้น</td>
+                                <td><%= (lot.price * lot.qty) %> บาท</td>
+                                <td><form action="/cart/deleteLotId=<%= lot.item %>" method="POST"><button type="submit" class="btn btn-danger">ลบ</button></form></td>
+                            </tr>
+                            <% } %>
+                        <% }) %>
+                        <tr>
+                            <td colspan="3">ราคารวมทั้งหมด</td>
+                            <td><%= cart.total %> บาท</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row justify-content-center">
+                <% if(locals.user){ %>
+                    <form class="form-group" action="/pay" method="GET">
+                        <input type="submit" name="" value="ซื้อเลย" class="btn btn-primary">
+                    </form>
+                <% } %>
+                        
+                <form class="form-group" action="/cart/deleteAll" method="POST">
+                    <input type="submit" name="" value="ล้างตระกร้า" class="btn btn-secondary">
+                </form>
+                <% if(!locals.user){ %>
+                    <p style="color: red;">กรุณาล็อคอินก่อนสั่งซื้อสลาก</p>
+                <% } %>
+            </div>
+            <!-- <script>
+                $(document).ready(function buyBuyBuy()
+                {
+                    $(document).on('click', '#buy', function()
+                    {
+                        const lotids = $('#mycart').attr('data-idlot');
+                        console.log(lotids);
+                    })
+                })
+            </script> -->
+        </div>
+    </div>
+</div>
+<%- include("partials/footer") %>

@@ -1,0 +1,31 @@
+div{
+    font-family: 'K2D', sans-serif;
+}
+.row{
+    align-content: center;
+}
+.container .row .input-group .form-control,
+.container .row .input-group .botton1{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.container .row .container .form-check-inline{
+    font-size: 15px;
+}
+.container .row .shop p{
+    font-size: 15px;
+    margin: 10px;
+}
+.container .row .botton2{
+    font-size: 15px;
+}
+.shop figure:hover img {
+	opacity: .5;
+}
+@media only screen and (max-width: 780px)
+{
+    .container .row .shop{
+        text-align: center;
+        margin: 0px 15px 25px 15px;
+    }
+}

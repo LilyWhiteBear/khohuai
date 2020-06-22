@@ -1,0 +1,71 @@
+<%- include("partials/header") %>
+
+	<link rel="stylesheet" href="/css/lotcheck.css">
+	<script src="/js/lotcheck.js" defer></script>
+
+<br>
+<div class="container-fluid">
+	<div class="row justify-content-md-center"> 
+		<div class="col-12 col-md-6 text-center" style="min-height: 250px;">
+			<h4>ตรวจสลากกินแบ่งรัฐบาล</h4>
+			<br>
+			<div class="lotto">
+				<select id="tInput" class="tInput" data-winner="<%= w %>" onchange="show()">
+					<option value="99" selected>---------------------</option>
+					<option value="1" >1 กรกฏาคม 2563</option>
+					<option value="2" >16 มิถุนายน 2563</option>
+				</select>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th scope="col">รางวัลที่</th>
+						<th scope="col">หมายเลขที่ถูกรางวัล</th>
+						<th scope="col">จำนวนเงินรางวัล</th>
+					</tr>
+					</thead>
+					<tbody>
+					<% w.forEach(function(w){ %>
+						<tr id="a<%= w.t %>" class="res" style="visibility: hidden;">
+							<td scope="row"><%= w.rank %></td>
+							<td><%= w.number %></td>
+							<td><%= w.prize %></td>
+						</tr>
+					<% }); %>
+						
+					</tbody>
+				</table>
+			</div>
+			<h id="hide" >เสียใจด้วย คุณไม่ถูกรางวัล</h>
+			
+        </div>
+	</div>
+</div>
+
+<script>
+	var previous = 99;
+	function show(){
+		var tInp = document.getElementById("tInput").value;
+		var tId = "#a" + tInp;
+		console.log(tId);
+		if(tInp != 99){
+			var tIdAll = document.querySelectorAll(tId);
+			var i;
+			for(i = 0; i < tIdAll.length; i++){
+				tIdAll[i].style.visibility = "visible";
+			}
+			if(previous != 99 && previous != tInp){
+				var preId = "#a" + previous;
+				console.log(preId);
+				preIdAll = document.querySelectorAll(preId);
+				for(i = 0; i < preIdAll.length; i++){
+					preIdAll[i].style.visibility = "hidden";
+				}
+			}
+			previous = tInp;
+		}
+	}
+
+</script>
+<%- include("partials/footer") %>

@@ -1,0 +1,48 @@
+<%- include("partials/header") %>
+    <link rel="stylesheet" href="/css/game.css">
+    <script src="/js/game.js" defer></script>
+
+<div class="container" style="text-align: center;">
+    <br>
+        <h4>Xo หรรษาพารวย</h4>
+        <br>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <div class="flex-container">
+                    <div data-index="1" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="2" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="3" id="b" onclick="play(this)">&#160;&#160;</div> 
+                </div>
+                <div class="flex-container">
+                    <div data-index="4" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="5" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="6" id="b" onclick="play(this)">&#160;&#160;</div> 
+                </div>
+                <div class="flex-container">
+                    <div data-index="7" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="8" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="9" id="b" onclick="play(this)">&#160;&#160;</div> 
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                    <h2>กติกาการเล่น</h1>
+                    <h3>1. ชนะจะได้รับ 1 ชิ้นส่วน เสมอหรือแพ้ไม่ได้อะไรเลย</h3>
+                    <h3>2. เล่นได้วันละ 1 ครั้ง</h3>
+                    <h3>3. สะสมครบ 100 ชิ้นส่วน แลกฟรี ล็อตเตอรี่ 1 ใบ!</h3>
+                    <h4>เหลือจำนวนครั้งอีก <span id="proc"><%= thisUser.game %></span> ครั้ง</h4>
+                    <% if(locals.user){ %>
+                        <form action="/play" method="POST">
+                            <button type="submit" class="btn btn-success float-center" id="starter" onclick="start()">เริ่มเกม</button>
+                        </form>
+                    <% } %>
+                    <% if(!locals.user){ %>
+                        <div>กรุณาล็อคอินเพื่อเล่น</div>
+                    <% } %>
+                    <form action="/win" method="POST">
+                        <button type="submit" class="btn btn-success float-center" id="reward" style="visibility: hidden;" onmousemove="isThisWin()">รับรางวัลได้ที่นี่!</button>
+                    </form>
+            </div>
+        </div>
+</div>
+<br>
+<%- include("partials/footer") %>

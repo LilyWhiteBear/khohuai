@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/add.css">
+    <script src="/js/add.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@600&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body>    
+    <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+      <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+      <a href="/" class="logo"><img src ="/images/khohuai1.png"></a>
+      <a href="/admin/add" class="w3-bar-item w3-button">เพิ่ม/ลบ สลาก</a>
+      <a href="/admin/lotday" class="w3-bar-item w3-button">ผลออกสลาก</a>
+      <a href="/admin/status" class="w3-bar-item w3-button">สถานะการโอนเงิน</a>
+    </div>
+    <div class="w3-main" style="margin-left:200px">
+      <div class="main">
+        <button class="w3-button w3-white w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+        <div class="head w3-container">
+          <h3>ผู้ดูแลระบบ</h3>
+        </div>
+      </div>
+      <div class="container col-md-12">
+        <br>
+        <h4>เพิ่ม/ลด จำนวนสลาก</h4>
+        <br>
+        <div class="table table-hover" style="min-height: 400px">
+          <div class="button">
+              <a href="/admin/addLot" type="button" class="btn btn-info btn-md">เพิ่ม</a>
+          </div>
+          <br>
+          <table id="user_data" class="table table-hover">
+            <thead>
+              <tr>
+                <th width="25%">หมายเลขสลาก</th>
+                <th width="25%">ราคา</th>
+                <th width="25%">ส่วนลด</th>
+                <th width="25%">ลบ</th>
+              </tr>
+            </thead>
+            <% Lottery.forEach(function(l){ %>
+            <tbody>
+              <tr>
+                <form method="post" action="/admin/deleteLot=<%= l._id %>">
+                  <th><%= l.number %></th>
+                  <th><%= l.price %></th>
+                  <th><%= l.discount %></th>
+                  <th><button type="submit" onclick="myFunction()" id="deletedata" class="btn btn-danger">ลบ</button></th>
+                </form>
+              </tr>
+            </tbody>
+          <% }) %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

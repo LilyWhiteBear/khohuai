@@ -1,0 +1,8 @@
+.table-responsive .table th,
+.table-responsive .table td{
+    font-size: 15px;
+}
+.row .btn{
+    font-size: 15px;
+    margin-right: 5px;
+}
