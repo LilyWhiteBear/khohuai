@@ -149,8 +149,8 @@ router.post("/prize", isAdmin, function(req, res){
         let n_usr = element.usr;
         let n_orderTime = element.orderTime;
         let n_num = element.number;
-        n_prize *= element.qty;
-        let n_winner = {usr:n_usr, number:n_num, t:n_date, rank:n_rank, prize:n_prize, orderTime: n_orderTime, status:false, image:"#"}
+        let n_prizes = n_prize * element.qty;
+        let n_winner = {usr:n_usr, number:n_num, t:n_date, rank:n_rank, prize:n_prizes, orderTime: n_orderTime, status:false, image:"#"}
         winner.create(n_winner, function(err, won){
           if(err) console.log(err);
         })
