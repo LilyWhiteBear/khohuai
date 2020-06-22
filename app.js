@@ -13,6 +13,7 @@ var adminRouter = require('./routes/admin');
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var session = require('express-session');
+port = process.env.PORT || 3000
 
 var app = express();
 app.use(session({
@@ -41,7 +42,7 @@ app.get("*", function(req, res, next){
     next();
 });
 
-app.listen(3001, function(req,res){
+app.listen(port, function(req,res){
     console.log('Server is runing');
 });
 
