@@ -42,7 +42,7 @@ app.get("*", function(req, res, next){
     next();
 });
 
-app.listen(port, function(req,res){
+app.listen(3001, function(req,res){
     console.log('Server is runing');
 });
 

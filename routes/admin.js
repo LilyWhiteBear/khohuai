@@ -1,3 +1,5 @@
+var cloudinary = require('cloudinary').v2;
+var { CloudinaryStorage } = require('multer-storage-cloudinary');
 var express = require('express');
 var router = express.Router();
 var mongoose = require("mongoose");
@@ -11,35 +13,62 @@ var prize = require("../model/prize");
 var User = require("../model/users");
 var winner = require("../model/winner");
 var purchase = require("../model/purchase");
+require('dotenv').config()
+
+const app = express();
 
 const { compileClientWithDependenciesTracked } = require('jade');
 
-const storage = multer.diskStorage({
-  destination: './public/lotteriesData',
-  filename: function(req, file, cb){
-    cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: './public/lotteriesData',
+//   filename: function(req, file, cb){
+//     cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
+//   }
+// });
 
 //ฟังก์ชันอัพโหลด image
-const imageFilter = function(req, file, cb){
-  var ext = path.extname(file.originalname);
-  if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){
-    return cb(new Error('Only Image is allowed'), false);
-  }
-  cb(null, true);
-};
+// const imageFilter = function(req, file, cb){
+//   var ext = path.extname(file.originalname);
+//   if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){
+//     return cb(new Error('Only Image is allowed'), false);
+//   }
+//   cb(null, true);
+// };
 
-const upload = multer({storage: storage, fileFilter: imageFilter});
+// const upload = multer({storage: storage, fileFilter: imageFilter});
 
-const storage2 = multer.diskStorage({
-  destination: './public/transferData',
-  filename: function(req, file, cb){
-    cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
-  }
+// const storage2 = multer.diskStorage({
+//   destination: './public/transferData',
+//   filename: function(req, file, cb){
+//     cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
+//   }
+// });
+
+// const upload2 = multer({storage: storage2, fileFilter: imageFilter});
+
+cloudinary.config({ 
+  cloud_name: 'lilywhitebear', 
+  api_key: '176586224562935', 
+  api_secret: '4oSq-oNRAfdn6083y2yH-4Xz-bk'
 });
 
-const upload2 = multer({storage: storage2, fileFilter: imageFilter});
+var storage = new CloudinaryStorage({
+  cloudinary : cloudinary,
+  folder : 'lotteriesData',
+  filename : function(req, file, cb){
+    cb(undefined, file.originalname);
+  }
+})
+const upload = multer({ storage : storage });
+
+var storage2 = new CloudinaryStorage({
+  cloudinary : cloudinary,
+  folder : 'transferData',
+  filename : function(req, file, cb){
+    cb(undefined, file.originalname);
+  }
+})
+const upload2 = multer({ storage : storage2 });
 
   router.get('/', isAdmin, function(req, res, next) {
     res.render("homepage.ejs");
