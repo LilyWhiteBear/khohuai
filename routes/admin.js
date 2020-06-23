@@ -19,33 +19,6 @@ const app = express();
 
 const { compileClientWithDependenciesTracked } = require('jade');
 
-// const storage = multer.diskStorage({
-//   destination: './public/lotteriesData',
-//   filename: function(req, file, cb){
-//     cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
-//   }
-// });
-
-//ฟังก์ชันอัพโหลด image
-// const imageFilter = function(req, file, cb){
-//   var ext = path.extname(file.originalname);
-//   if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){
-//     return cb(new Error('Only Image is allowed'), false);
-//   }
-//   cb(null, true);
-// };
-
-// const upload = multer({storage: storage, fileFilter: imageFilter});
-
-// const storage2 = multer.diskStorage({
-//   destination: './public/transferData',
-//   filename: function(req, file, cb){
-//     cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
-//   }
-// });
-
-// const upload2 = multer({storage: storage2, fileFilter: imageFilter});
-
 cloudinary.config({ 
   cloud_name: 'lilywhitebear', 
   api_key: '176586224562935', 
