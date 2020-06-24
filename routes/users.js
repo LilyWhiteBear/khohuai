@@ -18,7 +18,16 @@ router.get('/editpro', function(req, res, next) {
 });
 
 router.get('/editmoney', function(req, res, next) {
-  res.render('editmoney');
+  if(req.user){
+    let user = req.user.usr;
+    User.find({usr: user}, function(err, mon){
+      if(err) console.log(err);
+      else{
+        res.render('editmoney', {mon : mon});
+      }
+    })
+  }
+  
 });
 
 router.get('/register', function(req, res, next) {
@@ -28,7 +37,7 @@ router.get('/register', function(req, res, next) {
 router.get('/history', function(req, res){
   if(req.user){
     let user = req.user.usr;
-    purchase.find({usr: user}, function(err, hist){
+    purchase.findOne({usr: user}, function(err, hist){
       if(err) console.log(err);
       else{
         res.render("history", {hist : hist, m : moment});
