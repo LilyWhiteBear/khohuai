@@ -13,11 +13,8 @@ var prize = require("../model/prize");
 var User = require("../model/users");
 var winner = require("../model/winner");
 var purchase = require("../model/purchase");
-require('dotenv').config()
 
 const app = express();
-
-const { compileClientWithDependenciesTracked } = require('jade');
 
 cloudinary.config({ 
   cloud_name: 'lilywhitebear', 
