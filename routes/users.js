@@ -37,7 +37,7 @@ router.get('/register', function(req, res, next) {
 router.get('/history', function(req, res){
   if(req.user){
     let user = req.user.usr;
-    purchase.findOne({usr: user}, function(err, hist){
+    purchase.find({usr: user}, function(err, hist){
       if(err) console.log(err);
       else{
         res.render("history", {hist : hist, m : moment});
